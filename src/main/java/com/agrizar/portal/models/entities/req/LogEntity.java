@@ -30,9 +30,12 @@ public class LogEntity extends BaseEntity implements Serializable {
     @Column(name = "logportalid")
     private Integer logportalid;
     
+    @Column(name = "codigoempresa")
+    private String codigoEmpresa;
+    
     @Column(name = "ordencompra")
     private String oc;
-    
+
     @Column(name = "remision")
     private String remision;
 

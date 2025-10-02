@@ -4,9 +4,8 @@ import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @AllArgsConstructor
 public class Producto {
 	private String NumLineaOC;
 	private String SKU;
@@ -18,5 +17,13 @@ public class Producto {
 	private Double Descuento;
 	private Double ImpuestoRetenido;
 	private Double ImpuestoTrasladado;
-	private Date FechaEntrega;	
+	private Date FechaEntrega;
+	public Producto () {
+		this.Cantidad = 0.0;
+		this.PrecioUnitario = 0.0;
+		this.Importe = 0.0;
+		this.Descuento = 0.0;
+		this.ImpuestoRetenido = 0.0;
+		this.ImpuestoTrasladado = 0.0;
+	}
 }

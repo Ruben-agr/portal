@@ -86,15 +86,12 @@ public class RemisionServiceImpl implements RemisionService {
 		DetecnoResponse response = detecnoService.publicarRemision(req, hispatec.getCodigoEmpresa());
 		
 		if (response != null) {
-			LogDto logDto;
 			if (response.getSuccess()) {
-				logDto = new LogDto(oc, remision);
-				logService.save(logDto);
+				logService.save(new LogDto(hispatec.getCodigoEmpresa(), oc, remision));
 			} else {
 				String mensaje = String.format("Remision: %s de la OC: %s no publicada. Mensaje: %s", remision, oc, response.getMessage()) ;
 				log.error(mensaje);
-				logDto = new LogDto(oc, remision, response.getMessage());
-				logService.save(logDto);
+				logService.save(new LogDto(hispatec.getCodigoEmpresa(), oc, remision, response.getMessage()));
 			}
 		} 
 		

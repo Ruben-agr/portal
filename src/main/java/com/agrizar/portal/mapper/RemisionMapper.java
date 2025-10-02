@@ -20,12 +20,12 @@ public final class RemisionMapper {
 		result.setSKU(entity.getSku());
 		result.setDescripcion(entity.getDescripcion());
 		result.setUnidadMedida(entity.getUnidadMedida());
-		result.setCantidad(Double.valueOf(entity.getCantidad().toString()));
-		result.setPrecioUnitario(Double.valueOf(entity.getPrecioUnitario().toString()));
-		result.setImporte(Double.valueOf(entity.getImporte().toString()));
-		result.setDescuento(Double.valueOf(entity.getDescuentoL().toString()));
-		result.setImpuestoRetenido(Double.valueOf(entity.getImpRetenido().toString()));
-		result.setImpuestoTrasladado(Double.valueOf(entity.getImpTrasladado().toString()));
+		if (entity.getCantidad() != null) result.setCantidad(Double.valueOf(entity.getCantidad().toString()));
+		if (entity.getPrecioUnitario() != null) result.setPrecioUnitario(Double.valueOf(entity.getPrecioUnitario().toString()));
+		if (entity.getImporte() != null) result.setImporte(Double.valueOf(entity.getImporte().toString()));
+		if (entity.getDescuentoL() != null) result.setDescuento(Double.valueOf(entity.getDescuentoL().toString()));
+		if (entity.getImpRetenido() != null) result.setImpuestoRetenido(Double.valueOf(entity.getImpRetenido().toString()));
+		if (entity.getImpTrasladado() != null) result.setImpuestoTrasladado(Double.valueOf(entity.getImpTrasladado().toString()));
 		result.setFechaEntrega(entity.getFechaEntrega());
 		return result;
 	}
@@ -47,12 +47,12 @@ public final class RemisionMapper {
 		result.setFechaRecepcionMercancia(entity.getFechaRem());
 		result.setSucursal("");
 		result.setShipTo("");
-		result.setSubtotal(Double.valueOf(entity.getSubTotal().toString()));
-		result.setTotalImpuestosTrasladados(Double.valueOf(entity.getTotalImpTrasladados().toString()));
-		result.setTotalImpuestosRetenidos(Double.valueOf(entity.getTotalImpRetenidos().toString()));
-		result.setDescuentos(Double.valueOf(entity.getDescuentos().toString()));
+		if (entity.getSubTotal() != null) result.setSubtotal(Double.valueOf(entity.getSubTotal().toString()));
+		if (entity.getTotalImpTrasladados() != null) result.setTotalImpuestosTrasladados(Double.valueOf(entity.getTotalImpTrasladados().toString()));
+		if (entity.getTotalImpRetenidos() != null) result.setTotalImpuestosRetenidos(Double.valueOf(entity.getTotalImpRetenidos().toString()));
+		if (entity.getDescuentos() != null) result.setDescuentos(Double.valueOf(entity.getDescuentos().toString()));
 		result.setMoneda(entity.getMoneda());
-		result.setTotal(Double.valueOf(entity.getTotal().toString()));
+		if (entity.getTotal() != null) result.setTotal(Double.valueOf(entity.getTotal().toString()));
 		result.setRfcEmisor(entity.getRfcEmisor());
 		result.setRfcReceptor(entity.getRfcReceptor());
 

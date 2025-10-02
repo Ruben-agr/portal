@@ -3,6 +3,7 @@ package com.agrizar.portal.services.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -111,11 +112,15 @@ public class DetecnoServiceImpl implements DetecnoService {
 				}
 			}
 		}
-
-		if (res != null && res.getBody() != null) {
-			return res.getBody();
+		
+		if (res != null && res.getStatusCode() == HttpStatus.OK) {
+	        DetecnoResponse response = new DetecnoResponse();
+	        response.setSuccess(true);
+	        response.setResponseCode(HttpStatus.OK.value());
+	        response.setMessage("");
+	        return response;
 		}
-
+		
 		return null;
 	}
 

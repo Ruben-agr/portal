@@ -5,7 +5,6 @@ import javax.mail.MessagingException;
 import org.springframework.stereotype.Service;
 
 import com.agrizar.portal.enums.ETipoUsuarioNotificar;
-import com.agrizar.portal.services.BitacoraService;
 import com.agrizar.portal.services.ConfiguracionService;
 import com.agrizar.portal.services.MailSenderService;
 import com.agrizar.portal.services.NotificacionService;
@@ -19,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 public class NotificacionServiceImpl implements NotificacionService {
 
 	private final MailSenderService mailSenderService;
-	private final BitacoraService bitacoraService;
 	private final ConfiguracionService configuracionService;
 	
 	public void enviar(String asunto, String mensaje, ETipoUsuarioNotificar tipo) {
@@ -42,7 +40,6 @@ public class NotificacionServiceImpl implements NotificacionService {
 			mailSenderService.enviarCorreo(destinatario, asunto, destinatarioCC, mensaje, false);
 		} catch (MessagingException e) {
 			log.error("Error al enviar correo: {}", e.getMessage());
-			bitacoraService.save(e.getMessage());
 		}
 	}
 

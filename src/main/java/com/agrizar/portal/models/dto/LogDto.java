@@ -8,6 +8,7 @@ import lombok.Data;
 public class LogDto {
 
     private Integer logportalid;
+    private String codigoEmpresa;
     private String oc;
     private String remision;
     private String logerror;
@@ -16,13 +17,16 @@ public class LogDto {
 	public LogDto() {
 	}
 	
-    public LogDto(String oc, String remision) {
+    public LogDto(String codigoEmpresa, String oc, String remision) {
+    	this.codigoEmpresa = codigoEmpresa;
     	this.oc = oc;
     	this.remision = remision;
+    	this.logerror = "";
     	this.estadoId = ETipoLog.REMISION_PUBLICADA.getId();
     }
 
-    public LogDto(String oc, String remision, String logerror) {
+    public LogDto(String codigoEmpresa, String oc, String remision, String logerror) {
+    	this.codigoEmpresa = codigoEmpresa;
     	this.oc = oc;
     	this.remision = remision;
     	this.logerror = logerror;

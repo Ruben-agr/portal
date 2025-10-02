@@ -7,9 +7,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @AllArgsConstructor
 public class RecepcionRequest {
 	private String NoOC;
 	private String NoProveedor;
@@ -28,5 +27,13 @@ public class RecepcionRequest {
 	private String RfcReceptor;
 	private List<Producto> Productos;
 	private Control Control;
+
+	public RecepcionRequest() {
+		this.Subtotal = 0.0;
+		this.TotalImpuestosTrasladados = 0.0;
+		this.TotalImpuestosRetenidos = 0.0;
+		this.Descuentos = 0.0;
+		this.Total = 0.0;
+	}
 	
 }

@@ -13,6 +13,7 @@ public final class LogMapper {
 	public static LogEntity convertToEntity(LogDto dto) {
 		LogEntity entity = new LogEntity();
 		entity.setLogportalid(dto.getLogportalid()); 
+		entity.setCodigoEmpresa(dto.getCodigoEmpresa());
 		entity.setOc(dto.getOc());
 		entity.setRemision(dto.getRemision());
 		entity.setLogerror(dto.getLogerror());

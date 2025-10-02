@@ -1,8 +1,13 @@
 package com.agrizar.portal;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,23 +61,36 @@ public class PortalApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
     	
     	log.info("Iniciando   ...");
-    	
+        LocalDateTime inicioEjecucion = LocalDateTime.now();
+        log.info("========================================");
+        log.info("Iniciando proceso Portal - {}", inicioEjecucion);
+        log.info("Argumentos: {}", Arrays.toString(args));
+        
+        int exitCode = 0;
+        
     	try {
     		procesarParametros(args);
     		
     	} catch(IllegalArgumentException e) {
     		log.error("Error: ", e);
+    		exitCode = 1;
+    		
     	} catch(Exception e) {
 		log.error("Error: ", e);
 		bitacoraService.save("Trazabilidad Error: " + e.getMessage());
 		NotificacionService.enviar("Proceso batch de Trazabilidad (Error)"
-				, "Error en proceso batch de Trazabilidad: " + e.getMessage()
+				, "Error en proceso batch de Trazabilidad: " + e.getMessage() + e.getMessage() + "\nStackTrace: " + getStackTraceAsString(e)
 				, ETipoUsuarioNotificar.TECNICO);
-    	}
+		exitCode = 2;
+		
+    	} finally {
+            LocalDateTime finEjecucion = LocalDateTime.now();
+            Duration duracion = Duration.between(inicioEjecucion, finEjecucion);
+            log.info("Finalizando proceso - Duración: {} segundos", duracion.getSeconds());
+            log.info("========================================");
+        }
     	
-    	log.info("Finalizando ...");
-    	log.info("------------------------------------------");
-        
+    	System.exit(exitCode);   
     }
 
     private void procesarParametros(String[] args) throws Exception {
@@ -252,5 +270,11 @@ public class PortalApplication implements CommandLineRunner {
         System.out.println("   20        En base a la configuracion de los parametros de la base de datos java -jar portal.jar 20");
 
     }
-
+    
+    private String getStackTraceAsString(Exception e) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        return sw.toString();
+    }
 }
