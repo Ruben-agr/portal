@@ -75,7 +75,7 @@ public class RemisionServiceImpl implements RemisionService {
 
 	private void publicarRemisionDetecno(List<RemisionHispatecDto> remisionHispatec) {
 		
-		RemisionHispatecDto hispatec = remisionHispatec.get(0);
+		RemisionHispatecDto hispatec = remisionHispatec.get(remisionHispatec.size()-1);
 		String oc = hispatec.getOc();
 		String remision = hispatec.getRemision(); 
 		RecepcionRequest req = RemisionMapper.convertToRequest(hispatec);
