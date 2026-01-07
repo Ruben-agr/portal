@@ -14,4 +14,13 @@ public class DetecnoOrdenCompraResponse {
 	@JsonProperty("FechaPublicacion")
 	private Date fechapublicacionoc;
 
+	@JsonProperty("Total")
+	private Float total;
+
+	@JsonProperty("SaldoConsumido")
+	private Float saldoconsumido;
+
+	@JsonProperty("SaldoInsoluto")
+	private Float saldoinsoluto;
+	
 }

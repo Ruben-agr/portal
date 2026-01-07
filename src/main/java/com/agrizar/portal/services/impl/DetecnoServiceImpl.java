@@ -1,6 +1,5 @@
 package com.agrizar.portal.services.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -33,13 +32,13 @@ public class DetecnoServiceImpl implements DetecnoService {
 	private final DetecnoApiClient detecnoApiClient;
 	private final EmpresaService empresaService;
 		
-	public Date getOrdenCompra(String oc, String codigoEmpresa) {
+	public DetecnoOrdenCompraResponse getOrdenCompra(String oc, String codigoEmpresa) {
 		EmpresaDto empresa = null;
 		ResponseEntity<DetecnoOrdenCompraResponse> res = null;
 		try {
 			empresa = empresaService.getEmpresa(codigoEmpresa);
 			res = detecnoApiClient.getOrdenCompra(oc, empresa.getApikey(), addPrefijo(empresa.getToken()));
-			return res.getBody().getFechapublicacionoc();
+			return res.getBody();
 
 		} catch (FeignException e) {
 			log.error("Error al obtener la fecha de publicacion de la OC: {} estatus: {} mensaje: {}", oc, e.status(), e.getMessage());
@@ -47,7 +46,7 @@ public class DetecnoServiceImpl implements DetecnoService {
 				empresaService.setEmpresa(empresa);
 				try {
 					res = detecnoApiClient.getOrdenCompra(oc, empresa.getApikey(), addPrefijo(empresa.getToken()));
-					return res.getBody().getFechapublicacionoc();
+					return res.getBody();
 
 				} catch (FeignException e1) {
 					log.error("Error al obtener la fecha de publicacion de la OC: {} estatus: {} mensaje: {}", oc, e1.status(), e1.getMessage());

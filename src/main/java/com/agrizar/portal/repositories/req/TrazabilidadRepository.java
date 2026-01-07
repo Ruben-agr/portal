@@ -36,4 +36,8 @@ public interface TrazabilidadRepository extends CrudRepository<BitacoraEntity, I
 	List<String> getEstatusPendientes(@Param("fechaInicial") LocalDate fechaInicial
 			, @Param("fechaFinal") LocalDate fechaFinal);
 
+	@Query(value = "select case when tipo = 2 then 1 else 0 end from trazabilidad where codigoempresa = :codigoempresa and folioochispatec = :folioochispatec limit 1", nativeQuery = true)	
+	Integer isOCServicio(@Param("codigoempresa") String codigoempresa
+			, @Param("folioochispatec") String folioochispatec);
+
 }

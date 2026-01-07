@@ -14,6 +14,9 @@ public class TrazabilidadFacDto {
 	private Integer ocfolio;
 	private String formapago;
 	private Date fechaocportal;
+	private Float saldototal;
+	private Float saldoconsumido;
+	private Float saldoinsoluto;
 	private String rmcusuario;
 	private Date rmcfecha;
 	private String rmcserie;
