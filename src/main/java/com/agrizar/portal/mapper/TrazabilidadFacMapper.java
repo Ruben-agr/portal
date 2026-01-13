@@ -34,7 +34,11 @@ public final class TrazabilidadFacMapper {
 				entity.getFcUuid(),
 				null,
 				null,
-				null
+				null,
+				entity.getUsuario(),         // Usuario que hizo la factura
+				entity.getFechaCreacion(),   // fecha en que se registro la factura
+				entity.getFcfecha(),         // Fecha en que el usuario hizo el documento factura en el ERP
+				entity.getFcfolio()          // folio del proveedor que se registro en la factura en ERP
 				);
 		return dto;
 	}

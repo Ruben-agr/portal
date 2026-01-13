@@ -30,4 +30,8 @@ public class TrazabilidadFacDto {
 	private String uuidportal;
 	private Date facfecha;
 	private Float factotal;
+	private String facusuarioh;
+	private Date fcfecha;
+	private Date docfechah;
+	private String fcfolio;
 }

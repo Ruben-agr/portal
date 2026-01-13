@@ -23,4 +23,6 @@ public class OrdenFacturaDto {
 	private Date fechaCreacion;
 	private String maquina;
 	private String usuario;
+	private Date fcfecha;
+	private String fcfolio;
 }

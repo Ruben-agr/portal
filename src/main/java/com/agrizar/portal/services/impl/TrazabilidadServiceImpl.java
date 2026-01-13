@@ -57,8 +57,12 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 	//                   rmcserie                  rmcserieportal
 	//                   rmcfolio                  rmcfolioportal
 	//                                         
-	// Factura           facserie                               
-	//                   facfolio                               
+	// Factura           facserie
+	//                   facfolio
+	//                   facusuarioh
+	//                   fcfecha
+	//                   docfechah
+	//                   fcfolio
 	//                   uuid                      uuidportal
 	//                                             facfecha
 	//                                             factotal

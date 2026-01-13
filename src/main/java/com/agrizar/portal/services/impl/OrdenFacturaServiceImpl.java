@@ -41,7 +41,9 @@ public class OrdenFacturaServiceImpl implements OrdenFacturaService {
                 (String) item[11],
                 (Date) item[12],
                 (String) item[13],
-                (String) item[14]
+                (String) item[14],
+                (Date) item[15],
+                (String) item[16]
         ))
         .collect(Collectors.toList());
 	}
