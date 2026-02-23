@@ -278,6 +278,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 
 	private void limpiarDatosRemisionFacturaOrden(TrazabilidadFacDto orden) {
 		// Datos de remisión Hispatec
+		orden.setRmcusuario(null);
 		orden.setRmcserie(null);
 		orden.setRmcfolio(null);
 		orden.setRmcfecha(null);
@@ -295,7 +296,13 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 		// Datos de factura Portal
 		orden.setUuidportal(null);
 		orden.setFacfecha(null);
-		orden.setFactotal(null);		
+		orden.setFactotal(null);
+
+		// Ultimas 4 columnas
+		orden.setFacusuarioh(null);
+		orden.setFcfecha(null);
+		orden.setDocfechah(null);
+		orden.setFcfolio(null);		
 	}
 
 	private void insertarFacturas(boolean esServicio) {
