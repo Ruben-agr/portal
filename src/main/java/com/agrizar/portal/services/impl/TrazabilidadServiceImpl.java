@@ -163,6 +163,18 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 		for (TrazabilidadFacDto orden : ordenesFactura) {
 			
 			String empresaOrden = orden.getOcempresa() + orden.getOcserie() + orden.getOcfolio();
+
+			// Identifico que tipo de requisicion es la OC (1=Material, 2=Servicio)
+			esServicio = trazabilidadRepository
+					.isOCServicio (orden.getOcempresa(), orden.getOcserie() + orden.getOcfolio()) == 1;
+			
+			if (esServicio) {
+				orden.setRmcusuario(null);
+				orden.setRmcfecha(null);
+				orden.setRmcserie(null);
+				orden.setRmcfolio(null);
+			}
+						
 			if (empresaOrden.equals(empresaOrdenAnterior)) {
 				TrazabilidadFacDto anterior = ordenCache.get("anterior");
 				orden.setFechaocportal(anterior.getFechaocportal());
@@ -178,13 +190,9 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 				
 				EmpresaDto empresa = empresaService.getEmpresaWithToken(orden.getOcempresa());
 				if (empresa == null) continue;
-				
+
 				leerInformacionDetecno(orden);
 
-				// Identifico que tipo de requisicion es la OC (1=Material, 2=Servicio)
-				esServicio = trazabilidadRepository
-						.isOCServicio (orden.getOcempresa(), orden.getOcserie() + orden.getOcfolio()) == 1;
-				
 				empresaOrdenAnterior = empresaOrden;
 			}
 			
