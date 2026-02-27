@@ -153,6 +153,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 	private List<TrazabilidadFacDto> prepararOrdenes(String ordenJoin) {
     	String empresaOrdenAnterior = "";
     	boolean esServicio = false;
+    	boolean esServicioAnterior = false;
     	
     	log.info("hispatec comienza");
 		List<TrazabilidadFacDto> ordenesFactura = TrazabilidadFacMapper.convertToDtos(ordenFacturaService.getOrdenes(ordenJoin));
@@ -165,6 +166,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 			String empresaOrden = orden.getOcempresa() + orden.getOcserie() + orden.getOcfolio();
 
 			// Identifico que tipo de requisicion es la OC (1=Material, 2=Servicio)
+			esServicioAnterior = esServicio;
 			esServicio = trazabilidadRepository
 					.isOCServicio (orden.getOcempresa(), orden.getOcserie() + orden.getOcfolio()) == 1;
 			
@@ -185,7 +187,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 			} else {
 
 				if (!empresaOrdenAnterior.isEmpty()) {
-					insertarRecepcionesFacturas(esServicio);
+					insertarRecepcionesFacturas(esServicioAnterior);
 				}
 				
 				EmpresaDto empresa = empresaService.getEmpresaWithToken(orden.getOcempresa());
@@ -263,7 +265,8 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
     		if (primeraVez) {
     			primeraVez = false;
     		} else {
-    			ordenesNuevasCache.put(rmcSerieFolio, orden);	
+    			String key = orden.getOcempresa() + orden.getOcserie() + orden.getOcfolio() + rmcSerieFolio;
+    			ordenesNuevasCache.put(key, orden);	
     		}
     	}
 	}
@@ -350,7 +353,8 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
     		if (primeraVez) {
     			primeraVez = false;
     		} else {
-    			ordenesNuevasCache.put(rmcSerieFolio, orden);	
+    			String key = orden.getOcempresa() + orden.getOcserie() + orden.getOcfolio() + rmcSerieFolio;
+    			ordenesNuevasCache.put(key, orden);	
     		}
 		}
 	}
