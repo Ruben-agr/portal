@@ -241,33 +241,20 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 	private void insertarRecepciones(boolean esServicio) {
 		
 		if (recepcionesCache.isEmpty()) return;
-			
-		boolean primeraVez = true;
-		TrazabilidadFacDto ordenAnterior = ordenCache.get("anterior").toBuilder().build();
-		
+					
     	for (DetecnoRM rm : recepcionesCache.values()) {
     		
-    		TrazabilidadFacDto orden = null;
-    		// Sobreescribir anterior vacio o insertar una nueva
-    		if (primeraVez && estaVacio(ordenAnterior)) {
-    			orden = ordenCache.get("anterior");
-    		} else {
-    			orden = ordenAnterior.toBuilder().build();
-        		limpiarDatosRemisionFacturaOrden(orden);
-    			if (primeraVez) primeraVez = false;
-    		}
+    		// insertar una nueva
+    		TrazabilidadFacDto orden = ordenCache.get("anterior").toBuilder().build();
+    		limpiarDatosRemisionFacturaOrden(orden);
     		
     		String rmcSerieFolio = rm.getRmcSerieNumero();
     		setRemisionPortal(orden, rmcSerieFolio, false);
 
     		updFacturaBaseRemision(orden, rmcSerieFolio);
 
-    		if (primeraVez) {
-    			primeraVez = false;
-    		} else {
-    			String key = orden.getOcempresa() + orden.getOcserie() + orden.getOcfolio() + rmcSerieFolio;
-    			ordenesNuevasCache.put(key, orden);	
-    		}
+			String key = orden.getOcempresa() + orden.getOcserie() + orden.getOcfolio() + rmcSerieFolio;
+			ordenesNuevasCache.put(key, orden);	
     	}
 	}
 	
