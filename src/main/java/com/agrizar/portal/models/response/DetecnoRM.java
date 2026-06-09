@@ -16,4 +16,7 @@ public class DetecnoRM {
 	
 	@JsonProperty("FechaRecepcionMercancia")
 	private Date rmcFecha;
+	
+	@JsonProperty("FechaPublicacion")
+	private Date fechaPublicacion;
 }

@@ -54,6 +54,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 	//
 	// Remision          rmcusuario
 	//                   rmcfecha                  fecharemisionportal
+	//                   fechaPublicacion          fechaPublicacion
 	//                   rmcserie                  rmcserieportal
 	//                   rmcfolio                  rmcfolioportal
 	//                                         
@@ -264,6 +265,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 			 (orden.getRmcserieportal() == null || orden.getRmcserieportal().isEmpty())
 		  && (orden.getRmcfolioportal() == null || orden.getRmcfolioportal() == 0)
 		  && (orden.getFecharemisionportal() == null)
+		  && (orden.getFechaPublicacion() == null)
 		  && (orden.getUuidportal() == null || orden.getUuidportal().isEmpty())
 		  && (orden.getFacfecha() == null)
 		  && (orden.getFactotal() == null || orden.getFactotal() == 0f)
@@ -285,6 +287,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 		orden.setRmcserieportal(null);
 		orden.setRmcfolioportal(null);
 		orden.setFecharemisionportal(null);
+		orden.setFechaPublicacion(null);
 
 		// Datos de factura Hispatec
 		orden.setFacserie(null);
@@ -372,6 +375,7 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 		DetecnoRM rm = recepcionesCache.get(rmcSerieFolio);
 		if (rm != null) {
 			orden.setFecharemisionportal(rm.getRmcFecha());
+			orden.setFechaPublicacion(rm.getFechaPublicacion());
 			if (eliminar) recepcionesCache.remove(rmcSerieFolio);
 			
 			String[] arr = parsearRmcSerieFolio(rmcSerieFolio);

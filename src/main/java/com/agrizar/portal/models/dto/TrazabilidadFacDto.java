@@ -34,4 +34,5 @@ public class TrazabilidadFacDto {
 	private Date fcfecha;
 	private Date docfechah;
 	private String fcfolio;
+	private Date fechaPublicacion;
 }
