@@ -8,5 +8,6 @@ public interface TrazabilidadService {
 	void actualizar(LocalDate fechaInicial, LocalDate fechaFinal);
 	void actualizarPorOrden(String empresaOrdenCompra);
 	public void actualizarEstatusImportantes();
+	public void actualizarNoMovimiento();
 	
 }

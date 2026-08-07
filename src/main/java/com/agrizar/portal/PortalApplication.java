@@ -116,6 +116,9 @@ public class PortalApplication implements CommandLineRunner {
                 case ORDEN_COMPRA:
                     procesarOrden(args);
                     break;
+                case NO_MOVIMIENTO:
+                    procesarNoMovimiento(args);
+                    break;
                 case PUBLICAR_REM:
                     procesarPublicarRemision(args);
                     break;
@@ -264,6 +267,7 @@ public class PortalApplication implements CommandLineRunner {
         System.out.println("   11        Por dias atras (max 100 dias)                                    java -jar portal.jar 11 31");
         System.out.println("   12        Por rango de fechas (max 100 dias)                               java -jar portal.jar 12 2025-09-01 2025-09-10");
         System.out.println("   13        Por empresa y orden de compra                                    java -jar portal.jar 13 001,OC-99999");
+        System.out.println("   14        Por un conjunto de OCs (las que no tienen movimiento)            java -jar portal.jar 14");
         System.out.println("");
         System.out.println("   Publicar en el portal remisiones pendientes");
         System.out.println("   Parametro Descripcion                                                      Ejemplo");
@@ -277,4 +281,16 @@ public class PortalApplication implements CommandLineRunner {
         e.printStackTrace(pw);
         return sw.toString();
     }
+
+	private void procesarNoMovimiento(String[] args) {
+        log.info("Ejecutando proceso Conjunto de OCs (las que no tienen movimiento)");
+        bitacoraService.save("Trazabilidad Inicia");
+        trazabilidadService.actualizarNoMovimiento();
+        bitacoraService.save("Trazabilidad Termina satisfactoriamente");
+		NotificacionService.enviar("Proceso batch de Trazabilidad"
+				, "Termino satisfactoriamente el proceso."
+				, ETipoUsuarioNotificar.TECNICO);
+		log.info("Proceso normal completado exitosamente");
+	}
+
 }

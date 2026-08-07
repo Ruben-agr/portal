@@ -40,4 +40,7 @@ public interface TrazabilidadRepository extends CrudRepository<BitacoraEntity, I
 	Integer isOCServicio(@Param("codigoempresa") String codigoempresa
 			, @Param("folioochispatec") String folioochispatec);
 
+	@Query(value = "select ordencompra from obtener_no_movimiento()", nativeQuery = true)	
+	List<String> getOrdenesNoMovimiento();
+
 }

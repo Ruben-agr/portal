@@ -5,6 +5,7 @@ public enum ETipoProceso {
 	DIAS_ATRAS (11),
 	RANGO_FECHAS (12),
 	ORDEN_COMPRA (13),
+	NO_MOVIMIENTO (14),
 	PUBLICAR_REM (20);
 	
 	private int id;

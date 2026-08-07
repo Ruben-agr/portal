@@ -513,5 +513,12 @@ public class TrazabilidadServiceImpl implements TrazabilidadService {
 		if (folio.matches("\\d+")) return Integer.valueOf(folio);
 		return null;
 	}
+	
+	@Transactional
+	public void actualizarNoMovimiento() {
+
+		List<String> ordenesCompra = trazabilidadRepository.getOrdenesNoMovimiento();
+		ejecutarBloques(ordenesCompra, null, null);
+	}
 
 }
